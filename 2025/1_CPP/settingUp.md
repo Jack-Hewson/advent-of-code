@@ -1,0 +1,1 @@
+Follow https://code.visualstudio.com/docs/languages/cpp and install this compiler to run c++ https://code.visualstudio.com/docs/cpp/config-mingw#_installing-the-mingww64-toolchain
