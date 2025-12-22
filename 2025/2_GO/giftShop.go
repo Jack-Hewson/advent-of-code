@@ -7,6 +7,13 @@ import (
 	"strings"
 )
 
+func isInvalidID(n int) bool {
+	s := strconv.Itoa(n)
+
+	mid := len(s) / 2
+	return s[:mid] == s[mid:]
+}
+
 func main() {
 	// example_ids := []string{
 	// 	"11-22",
@@ -21,26 +28,18 @@ func main() {
 	// 	"824824821-824824827",
 	// 	"2121212118-2121212124",
 	// }
+	file, _ := os.ReadFile("input.txt")
+
+	fileContentIds := strings.Split(strings.TrimSpace(string(file)), ",")
 
 	invalid_ids := 0
-
-	file, _ := os.ReadFile("input.txt")
-	fileContents := strings.TrimSpace((string(file)))
-	fileContentIds := strings.SplitSeq(fileContents, ",")
-
-	for val := range fileContentIds {
-		idRange := strings.Split(val, `-`)
+	for _, id := range fileContentIds {
+		idRange := strings.Split(id, "-")
 		min, _ := strconv.Atoi(idRange[0])
 		max, _ := strconv.Atoi(idRange[1])
 
 		for i := min; i <= max; i++ {
-			iString := strconv.Itoa(i)
-			middle := len(iString) / 2
-			firstHalf := iString[:middle]
-			secondHalf := iString[middle:]
-
-			if firstHalf == secondHalf {
-				fmt.Println(i)
+			if isInvalidID(i) {
 				invalid_ids += i
 			}
 		}
